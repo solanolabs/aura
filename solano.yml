@@ -9,7 +9,7 @@
 :timeout: 2400
 
 :test_pattern:
-  - **/*UITest.java
+  - 'aura*/**/*UITest.java'
 
 :tests:
   # 192patch_integration_android_phone_sauce
