@@ -16,3 +16,4 @@ pom.xml.releaseBackup
 version.properties
 *~
 tags
+.tddium*
