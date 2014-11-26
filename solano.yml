@@ -9,7 +9,9 @@
 :timeout: 2400
 
 :test_pattern:
-  - 'aura*/**/*UITest.java'
+  - 'aura*/**/MenuUITest.java'
+
+:headless: true
 
 :tests:
   # 192patch_integration_android_phone_sauce
