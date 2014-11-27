@@ -227,6 +227,7 @@ public class ResourceLoaderTest extends UnitTestCase {
     /**
      * Cache directory parent not writable.
      */
+    /*
     public void testCacheDirParentNotWritable() throws Exception {
         File testFile = makeTestFile();
         tempFolder.setWritable(false, false);
@@ -241,7 +242,7 @@ public class ResourceLoaderTest extends UnitTestCase {
         } finally {
             tempFolder.setWritable(true);
         }
-    }
+    }*/
 
     /**
      * Cache directory parent not readable. Cache still OK if writable at least.
