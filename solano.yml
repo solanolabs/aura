@@ -6,10 +6,7 @@
   :worker_setup: "mkdir -p $TDDIUM_REPO_ROOT/screenshots && touch $TDDIUM_REPO_ROOT/screenshots/.holder && mvn clean install"
 
 :timeout_hook: 1200
-:timeout: 2400
-
-:test_pattern:
-  - 'aura*/**/MenuUITest.java'
+:timeout: 7200
 
 :headless: true
 
