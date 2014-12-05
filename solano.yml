@@ -31,15 +31,12 @@ system:
   #  - "**/surefire-reports/TEST-*.xml"
 
   # 192patch_integration_firefox
-  #- type: "junit"
-  #  command: "echo Firefox version to be used: `firefox -version` && mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1 && echo Firefox version used: `firefox -version`"
-  #  invocation: single
-  #  mode: parallel
-  #  output: exit-status
-  #  files:
-  #  - include: '**/*Test.java'
-  #  report_files:
-  #  - "**/surefire-reports/TEST-*.xml"
+  - type: "junit"
+    command: "echo Firefox version to be used: `firefox -version` && mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1 && echo Firefox version used: `firefox -version`"
+    invocation: single
+    mode: basic
+    report_files:
+    - "**/surefire-reports/TEST-*.xml"
   #- "echo Firefox version to be used: `firefox -version` && mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1 && echo Firefox version used: `firefox -version`"
 
   # 192patch_integration_ie7_sauce
@@ -52,7 +49,7 @@ system:
   #- "mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445 -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen -Dwebdriver.browser.type=ie7 -Dwebdriver.remote.server=saucelabs.com -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -Dsauce.record.screenshots=true -Dsauce.record.video=true -DtestThreadCount=1"
 
   # 192patch_integration_ie8_sauce
-  - "mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445 -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen -Dwebdriver.browser.type=ie8 -Dwebdriver.remote.server=saucelabs.com -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1"
+  #- "mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445 -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen -Dwebdriver.browser.type=ie8 -Dwebdriver.remote.server=saucelabs.com -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1"
 
   # 192patch_integration_ie9_sauce
   #- "mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445 -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen -Dwebdriver.browser.type=ie9 -Dwebdriver.remote.server=saucelabs.com -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1"
