@@ -31,6 +31,8 @@ system:
     invocation: single
     mode: parallel
     output: exit-status
+    files:
+    - include: '**/*Test.java'
     report_files:
     - "**/surefire-reports/TEST-*.xml"
   #- "echo Firefox version to be used: `firefox -version` && mkdir -p $TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID -DtestThreadCount=1 && echo Firefox version used: `firefox -version`"
