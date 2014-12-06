@@ -4,6 +4,8 @@ system:
 :java:
   :java_version: java-7-openjdk
   :maven_version: 3.0.5
+:hooks:
+  :worker_setup: "mkdir -p $TDDIUM_REPO_ROOT/screenshots && touch $TDDIUM_REPO_ROOT/screenshots/.holder && mvn clean install"
 :timeout_hook: 1200
 :timeout: 7200
 :headless: true
@@ -31,8 +33,7 @@ system:
 #  mode: basic
 #  report_files: *1
 - type: junit
-  command: sh $TDDIUM_REPO_ROOT/.solano/192patch_integration_firefox_config.prebuilders.sh
-    && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
+  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
     -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
     -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
     -DtestThreadCount=1 && sh $TDDIUM_REPO_ROOT/.solano/192patch_integration_firefox_config.postbuilders.sh
