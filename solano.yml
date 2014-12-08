@@ -10,18 +10,18 @@ system:
 :timeout: 7200
 :headless: true
 :tests:
-- type: junit
-  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
-    -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
-    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
-    -Dwebdriver.browser.type=android_phone -Dwebdriver.remote.server=saucelabs.com
-    -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc
-    -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
-    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
-  invocation: single
-  mode: basic
-  report_files:
-  - "**/surefire-reports/TEST-*.xml"
+#- type: junit
+#  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
+#    -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+#    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+#    -Dwebdriver.browser.type=android_phone -Dwebdriver.remote.server=saucelabs.com
+#    -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc
+#    -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
+#    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+#  invocation: single
+#  mode: basic
+#  report_files:
+#  - "**/surefire-reports/TEST-*.xml"
 #- type: junit
 #  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
 #    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
@@ -43,20 +43,20 @@ system:
 #  invocation: single
 #  mode: basic
 #  report_files: *1
+- type: junit
+  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
+    -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.browser.type=ie7 -Dwebdriver.remote.server=saucelabs.com -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
+    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -Dsauce.record.screenshots=true
+    -Dsauce.record.video=true -DtestThreadCount=1
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/surefire-reports/TEST-*.xml"
 #- type: junit
-#  command: sh /vagrant/aura/.solano/192patch_integration_ie7_sauce_config.prebuilders.sh
-#    && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
-#    -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
-#    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
-#    -Dwebdriver.browser.type=ie7 -Dwebdriver.remote.server=saucelabs.com -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
-#    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
-#    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -Dsauce.record.screenshots=true
-#    -Dsauce.record.video=true -DtestThreadCount=1
-#  invocation: single
-#  mode: basic
-#  report_files: *1
-#- type: junit
-#  command: sh /vagrant/aura/.solano/192patch_integration_ie8_sauce_config.prebuilders.sh
+#  command: sh .solano/192patch_integration_ie8_sauce_config.prebuilders.sh
 #    && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
 #    -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
 #    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
