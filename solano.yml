@@ -22,28 +22,27 @@ system:
 #  mode: basic
 #  report_files:
 #  - "**/surefire-reports/TEST-*.xml"
-- type: junit
-  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
-    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=GOOGLECHROME -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
-    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
-    -DtestThreadCount=4
-  invocation: single
-  mode: basic
+#- type: junit
+#  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
+#    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=GOOGLECHROME -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
+#    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
+#    -DtestThreadCount=4
+#  invocation: single
+#  mode: basic
 #  output: exit-status
 #  files:
 #  - include: '**/*Test.java'
+#  report_files:
+#  - "**/surefire-reports/TEST-*.xml"
+- type: junit
+  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
+    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
+    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
+    -DtestThreadCount=5 && sh $TDDIUM_REPO_ROOT/.solano/192patch_integration_firefox_config.postbuilders.sh
+  invocation: single
+  mode: basic
   report_files:
   - "**/surefire-reports/TEST-*.xml"
-#- type: junit
-#  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
-#    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
-#    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
-#    -DtestThreadCount=1 && sh $TDDIUM_REPO_ROOT/.solano/192patch_integration_firefox_config.postbuilders.sh
-#  invocation: single
-#  mode: basic
-#  report_files: *1
-#  report_files: &1
-#  - "**/surefire-reports/TEST-*.xml"
 #- type: junit
 #  command: sh /vagrant/aura/.solano/192patch_integration_ie10_sauce.prebuilders.sh
 #    && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
@@ -100,15 +99,6 @@ system:
 #  mode: basic
 #  report_files:
 #  - "**/surefire-reports/TEST-*.xml"
-#- type: junit
-#  command: sh /vagrant/aura/.solano/template_config.prebuilders.sh && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml
-#    clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX
-#    -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc
-#    -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
-#    -DtestThreadCount=1 && sh /vagrant/aura/.solano/template_config.postbuilders.sh
-#  invocation: single
-#  mode: basic
-#  report_files: *1
 :collect:
   :repo:
   - screenshots/**/*
