@@ -28,7 +28,10 @@ system:
     -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
     -DtestThreadCount=1
   invocation: single
-  mode: basic
+  mode: parallel
+  output: exit-status
+  files:
+  - include: '**/*Test.java'
   report_files:
   - "**/surefire-reports/TEST-*.xml"
 #- type: junit
