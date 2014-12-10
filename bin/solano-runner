@@ -14,7 +14,8 @@ end.parse!
 classes = ARGV.map{|f| File.basename(f).split('.')[0]}
 cmd = "("
 cmd += "cd #{options[:prefix]} && " if options[:prefix]
-cmd += "mvn -Dtest=#{classes.join(",")} test"
+#cmd += "mvn -Dtest=#{classes.join(",")} test"
+cmd += "mvn -B -f aura-integration-test/pom.xml clean test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=GOOGLECHROME -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp  -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=./screenshots  -DtestThreadCount=2 -DtestClasses=#{classes.join(",")}"
 cmd += ")"
  
 puts cmd
