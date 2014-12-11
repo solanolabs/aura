@@ -86,7 +86,7 @@ public class AuraIntegrationTests extends TestSuite {
         // comma-delimited list of fully qualified test classes (case-insensitive), e.g. my.test.TestClass
         skipTests = ImmutableList.copyOf(System.getProperty("skipIntTests", "").toLowerCase().trim().split("\\s,\\s"));
         // Ivan: experiment with test names list
-        testsToRun = ImmutableList.copyOf(System.getProperty("testsToRun", "").toLowerCase().trim().split("\\s,\\s"));
+        testsToRun = ImmutableList.copyOf(System.getProperty("testsToRun", "").toLowerCase().trim().split(","));
     }
 
     /**
@@ -155,13 +155,17 @@ public class AuraIntegrationTests extends TestSuite {
                 queueTest(suite.testAt(i), result, queue, hostileQueue);
             }
         } else if (test instanceof TestCase) {
-            String testName = test.getClass().getName().toLowerCase() + "." + ((TestCase) test).getName().toLowerCase();
+            String caseName = ((TestCase) test).getName().toLowerCase();
+            String testClassName = test.getClass().getName().toLowerCase();
+            String testName = testClassName + "." + caseName;
             if (nameFragment != null) {
                 if (!testName.contains(nameFragment)) {
                     return;
                 }
-            } else if (testsToRun != null) {
-                if (!testsToRun.contains(testName)) {
+            // IPL: The following block was added by Ivan
+            } else if (!testsToRun.isEmpty()) {
+                String suiteName = testClassName.substring(testClassName.lastIndexOf('.') + 1);
+                if (!testsToRun.contains(suiteName)) {
                     return;
                 }
             } else if (!skipTests.isEmpty() && skipTests.contains(testName)) {

@@ -1,21 +1,9 @@
 #!/usr/bin/env ruby
  
-require 'optparse'
- 
-options = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: #{$0} [options]"
- 
-  opts.on("-d PREFIX", String, "Prefix") do |v|
-    options[:prefix] = v
-  end
-end.parse!
- 
 classes = ARGV.map{|f| File.basename(f).split('.')[0]}
 cmd = "("
-cmd += "cd #{options[:prefix]} && " if options[:prefix]
-#cmd += "mvn -Dtest=#{classes.join(",")} test"
-cmd += "mvn -B -f aura-integration-test/pom.xml clean test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=GOOGLECHROME -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp  -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=./screenshots  -DtestThreadCount=2 -DtestsToRun=DescriptorFilterTest,testGetSVGDef"
+cmd += "mvn -B -f ./aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=GOOGLECHROME -Djava.io.tmpdir=./tmp  -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=./screenshots  -DtestThreadCount=2 -DtestsToRun=#{classes.join(',')}"
+#cmd += "mvn #{ARGV.join('')} -DtestsToRun=#{classes.join(',')}"
 cmd += ")"
  
 puts cmd
