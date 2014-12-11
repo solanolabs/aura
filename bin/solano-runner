@@ -1,11 +1,18 @@
 #!/usr/bin/env ruby
- 
-classes = ARGV.map{|f| File.basename(f).split('.')[0]}
+
+# Separate maven options from arguments.
+# Arguments are treated as files paths list.
+(options, files) = ARGV.partition {|arg| arg.start_with?('-D')}
+
+# Fetch class names from files paths. 
+classes = files.map{|f| File.basename(f).split('.')[0]}
+
+# Compose maven command.
 cmd = "("
-cmd += "mvn -B -f ./aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=GOOGLECHROME -Djava.io.tmpdir=./tmp  -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=./screenshots  -DtestThreadCount=2 -DtestsToRun=#{classes.join(',')}"
-#cmd += "mvn #{ARGV.join('')} -DtestsToRun=#{classes.join(',')}"
+cmd += "mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DskipUnitTests -DrunIntTests -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots #{options.join(' ')} -DtestsToRun=#{classes.join(',')}"
 cmd += ")"
  
 puts cmd
  
+# Run.
 system(cmd)
