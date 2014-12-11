@@ -60,6 +60,7 @@ public class AuraIntegrationTests extends TestSuite {
     private static final boolean RUN_PERF_TESTS = System.getProperty("runPerfTests") != null;
 
     private final List<String> skipTests;
+    private final List<String> testsToRun;
 
     static {
         int numIterations = 0;
@@ -84,6 +85,8 @@ public class AuraIntegrationTests extends TestSuite {
 
         // comma-delimited list of fully qualified test classes (case-insensitive), e.g. my.test.TestClass
         skipTests = ImmutableList.copyOf(System.getProperty("skipIntTests", "").toLowerCase().trim().split("\\s,\\s"));
+        // Ivan: experiment with test names list
+        testsToRun = ImmutableList.copyOf(System.getProperty("testsToRun", "").toLowerCase().trim().split("\\s,\\s"));
     }
 
     /**
@@ -155,6 +158,10 @@ public class AuraIntegrationTests extends TestSuite {
             String testName = test.getClass().getName().toLowerCase() + "." + ((TestCase) test).getName().toLowerCase();
             if (nameFragment != null) {
                 if (!testName.contains(nameFragment)) {
+                    return;
+                }
+            } else if (testsToRun != null) {
+                if (!testsToRun.contains(testName)) {
                     return;
                 }
             } else if (!skipTests.isEmpty() && skipTests.contains(testName)) {
