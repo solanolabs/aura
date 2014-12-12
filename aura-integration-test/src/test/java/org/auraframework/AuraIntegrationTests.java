@@ -155,21 +155,28 @@ public class AuraIntegrationTests extends TestSuite {
                 queueTest(suite.testAt(i), result, queue, hostileQueue);
             }
         } else if (test instanceof TestCase) {
-            String caseName = ((TestCase) test).getName().toLowerCase();
-            String testClassName = test.getClass().getName().toLowerCase();
-            String testName = testClassName + "." + caseName;
+            String testName = test.getClass().getName().toLowerCase() + "." + ((TestCase) test).getName().toLowerCase();
             if (nameFragment != null) {
                 if (!testName.contains(nameFragment)) {
                     return;
                 }
-            // IPL: The following block was added by Ivan
-            } else if (!testsToRun.isEmpty()) {
-                String suiteName = testClassName.substring(testClassName.lastIndexOf('.') + 1);
-                if (!testsToRun.contains(suiteName)) {
-                    return;
-                }
             } else if (!skipTests.isEmpty() && skipTests.contains(testName)) {
                 return;
+            }
+            logger.info(String.format("IPL:8: %s", test.getClass().getName()));
+            // IPL: The following block was added by Ivan
+            if (!testsToRun.isEmpty()) {
+                String testClassName = test.getClass().getName().toLowerCase();
+                String suiteName = testClassName.substring(testClassName.lastIndexOf('.') + 1);
+                //if (suiteName == "attributeimpltest") {
+        	//    logger.info(String.format("IPL:1: %s", testShortName));
+                //}
+                if (!testsToRun.contains(suiteName)) {
+                    return;
+                } else {
+        	    logger.info(String.format("IPL:0: matched.suiteName='%s'", suiteName));
+        	    logger.info(String.format("IPL:2: testsToRun=%s", testsToRun.toString()));
+                }
             }
             if (RUN_PERF_TESTS) {
                 if (!PerfUtil.hasPerfTestAnnotation((TestCase) test)) {
