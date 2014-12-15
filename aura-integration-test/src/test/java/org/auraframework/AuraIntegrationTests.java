@@ -86,7 +86,12 @@ public class AuraIntegrationTests extends TestSuite {
         // comma-delimited list of fully qualified test classes (case-insensitive), e.g. my.test.TestClass
         skipTests = ImmutableList.copyOf(System.getProperty("skipIntTests", "").toLowerCase().trim().split("\\s,\\s"));
         // Ivan: experiment with test names list
-        testsToRun = ImmutableList.copyOf(System.getProperty("testsToRun", "").toLowerCase().trim().split(","));
+        String prop = System.getProperty("testsToRun", "");
+        if (prop != "") {
+            testsToRun = ImmutableList.copyOf(prop.toLowerCase().trim().split(","));
+        } else {
+            testsToRun = null;
+        }
     }
 
     /**
@@ -149,6 +154,9 @@ public class AuraIntegrationTests extends TestSuite {
     private void queueTest(final Test test, final TestResult result, Collection<Callable<TestResult>> queue,
             Collection<Callable<TestResult>> hostileQueue) {
         // queue up TestCases individually so they can be fully parallelized (vs. per-suite)
+        if (test instanceof TestSuite || test instanceof TestCase) {
+            return;
+        }
         if (test instanceof TestSuite) {
             TestSuite suite = (TestSuite) test;
             for (int i = 0; i < suite.testCount(); i++) {
@@ -165,7 +173,7 @@ public class AuraIntegrationTests extends TestSuite {
             }
             logger.info(String.format("IPL:8: %s", test.getClass().getName()));
             // IPL: The following block was added by Ivan
-            if (!testsToRun.isEmpty()) {
+            if (testsToRun != null) {
                 String testClassName = test.getClass().getName().toLowerCase();
                 String suiteName = testClassName.substring(testClassName.lastIndexOf('.') + 1);
                 //if (suiteName == "attributeimpltest") {
@@ -175,8 +183,8 @@ public class AuraIntegrationTests extends TestSuite {
         	          logger.info(String.format("IPL:1: skipped.suiteName='%s'", suiteName));
                     return;
                 } else {
-        	    logger.info(String.format("IPL:0: matched.suiteName='%s'", suiteName));
-        	    logger.info(String.format("IPL:2: testsToRun=%s", testsToRun.toString()));
+              	    logger.info(String.format("IPL:0: matched.suiteName='%s'", suiteName));
+              	    logger.info(String.format("IPL:2: testsToRun=%s", testsToRun.toString()));
                 }
             }
             if (RUN_PERF_TESTS) {
