@@ -172,6 +172,7 @@ public class AuraIntegrationTests extends TestSuite {
         	//    logger.info(String.format("IPL:1: %s", testShortName));
                 //}
                 if (!testsToRun.contains(suiteName)) {
+        	          logger.info(String.format("IPL:1: skipped.suiteName='%s'", suiteName));
                     return;
                 } else {
         	    logger.info(String.format("IPL:0: matched.suiteName='%s'", suiteName));
