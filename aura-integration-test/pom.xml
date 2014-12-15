@@ -95,8 +95,7 @@
         <screenshots.baseurl>file://${screenshots.directory}</screenshots.baseurl>
         <screenshots.directory>${project.build.directory}/screenshots</screenshots.directory>
         <skipUnitTests>true</skipUnitTests>
-        <!--<testClasses>**/*IntegrationTests.java</testClasses>-->
-        <testClasses />
+        <testClasses>**/*IntegrationTests.java</testClasses>
         <testCoverageClasses>**/*IntegrationCoverageTests.java</testCoverageClasses>
         <testNameContains /> <!-- case insensitive -->
         <testPhase>disabled</testPhase>
