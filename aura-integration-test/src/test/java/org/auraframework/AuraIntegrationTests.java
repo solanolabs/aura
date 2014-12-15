@@ -154,9 +154,6 @@ public class AuraIntegrationTests extends TestSuite {
     private void queueTest(final Test test, final TestResult result, Collection<Callable<TestResult>> queue,
             Collection<Callable<TestResult>> hostileQueue) {
         // queue up TestCases individually so they can be fully parallelized (vs. per-suite)
-        if (test instanceof TestSuite || test instanceof TestCase) {
-            return;
-        }
         if (test instanceof TestSuite) {
             TestSuite suite = (TestSuite) test;
             for (int i = 0; i < suite.testCount(); i++) {
