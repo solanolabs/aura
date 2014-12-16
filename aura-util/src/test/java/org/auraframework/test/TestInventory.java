@@ -111,6 +111,7 @@ public class TestInventory {
         TestFilter filter = ServiceLocator.get().get(TestFilter.class);
         TestSuite suite = new TestSuite();
         suites.put(type, suite);
+        int number = 0;
 
         System.out.println(String.format("Loading %s tests from %s", type, rootUri));
         
@@ -120,14 +121,16 @@ public class TestInventory {
             	Type target = getAnnotationType(testClass);
             	if (target == type) {
             		try {
-                        addTest(suite, filter, (Test) testClass.getMethod("suite").invoke(null));
-                    } catch (Exception e) {}
-                    try {
-                        addTest(suite, filter, new TestSuite(testClass.asSubclass(TestCase.class)));
-                    } catch (ClassCastException cce) {}
+                    addTest(suite, filter, (Test) testClass.getMethod("suite").invoke(null));
+                } catch (Exception e) {}
+                try {
+                    addTest(suite, filter, new TestSuite(testClass.asSubclass(TestCase.class)));
+                } catch (ClassCastException cce) {}
+                number++;
             	}
             }
         }
+        System.out.println(String.format("Loaded %d %s tests", number, type));
     }
     
     private Type getAnnotationType (Class<? extends Test> testClass) {

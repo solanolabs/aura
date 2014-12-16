@@ -32,8 +32,7 @@ system:
 #  - include: '**/*Test.java'
   report_files:
 #  - "**/surefire-reports/TEST-*.xml"
-  - "**/filesafe-reports/*.xml"
-  - "**/filesafe-reports/*.txt"
+  - "**/failsafe-reports/*.xml"
 #- type: junit
 #  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
 #    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp

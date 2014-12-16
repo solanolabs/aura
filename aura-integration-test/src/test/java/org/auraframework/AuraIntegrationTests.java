@@ -61,6 +61,7 @@ public class AuraIntegrationTests extends TestSuite {
 
     private final List<String> skipTests;
     private final List<String> testsToRun;
+    private int number = 0;
 
     static {
         int numIterations = 0;
@@ -119,6 +120,7 @@ public class AuraIntegrationTests extends TestSuite {
                 }
             }
         }
+        logger.info(String.format("IPL:6: tests_count=%d", number));
 
         ExecutorService executor = Executors.newFixedThreadPool(TestExecutor.NUM_THREADS);
         try {
@@ -168,7 +170,7 @@ public class AuraIntegrationTests extends TestSuite {
             } else if (!skipTests.isEmpty() && skipTests.contains(testName)) {
                 return;
             }
-            logger.info(String.format("IPL:8: %s", test.getClass().getName()));
+            //logger.info(String.format("IPL:8: %s", test.getClass().getName()));
             // IPL: The following block was added by Ivan
             if (testsToRun != null) {
                 String testClassName = test.getClass().getName().toLowerCase();
@@ -177,13 +179,14 @@ public class AuraIntegrationTests extends TestSuite {
         	//    logger.info(String.format("IPL:1: %s", testShortName));
                 //}
                 if (!testsToRun.contains(suiteName)) {
-        	          logger.info(String.format("IPL:1: skipped.suiteName='%s'", suiteName));
+                    //logger.info(String.format("IPL:1: skipped.suiteName='%s'", suiteName));
                     return;
                 } else {
               	    logger.info(String.format("IPL:0: matched.suiteName='%s'", suiteName));
               	    logger.info(String.format("IPL:2: testsToRun=%s", testsToRun.toString()));
                 }
             }
+            number++;
             if (RUN_PERF_TESTS) {
                 if (!PerfUtil.hasPerfTestAnnotation((TestCase) test)) {
                     return;

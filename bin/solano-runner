@@ -9,7 +9,7 @@ classes = files.map{|f| File.basename(f).split('.')[0]}
 
 # Compose maven command.
 cmd = "("
-cmd += "mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test -DrunIntTests -DskipUnitTests -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots #{options.join(' ')}"
+cmd += "mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml post-integration-test -DrunIntTests -DskipUnitTests -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots #{options.join(' ')}"
 cmd += " -DtestsToRun=#{classes.join(',')}" if classes.length > 0
 cmd += ")"
  
