@@ -22,26 +22,23 @@ system:
 #  mode: basic
 #  report_files:
 #  - "**/surefire-reports/TEST-*.xml"
-- type: junit
-  command: bin/solano-runner -Dwebdriver.browser.type=GOOGLECHROME -DtestThreadCount=5
-  invocation: single
-  mode: parallel
-#  mode: basic
-  output: exit-status
-  files:
-  - include: '**/*Test.java'
-  report_files:
-#  - "**/surefire-reports/TEST-*.xml"
-  - "**/failsafe-reports/TEST-*.xml"
 #- type: junit
-#  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
-#    -DskipUnitTests -DrunIntTests -Dwebdriver.browser.type=FIREFOX -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp
-#    -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots/$TDDIUM_SESSION_ID/$TDDIUM_TEST_EXEC_ID
-#    -DtestThreadCount=10 && sh $TDDIUM_REPO_ROOT/.solano/192patch_integration_firefox_config.postbuilders.sh
+#  command: bin/solano-runner -Dwebdriver.browser.type=GOOGLECHROME -DtestThreadCount=5
 #  invocation: single
+#  mode: parallel
 #  mode: basic
+#  output: exit-status
+#  files:
+#  - include: '**/*Test.java'
 #  report_files:
 #  - "**/surefire-reports/TEST-*.xml"
+#  - "**/failsafe-reports/TEST-*.xml"
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=FIREFOX -DtestThreadCount=5
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
 #- type: junit
 #  command: sh /vagrant/aura/.solano/192patch_integration_ie10_sauce.prebuilders.sh
 #    && mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
