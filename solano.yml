@@ -20,23 +20,24 @@ system:
 #  mode: basic
 #  report_files: &1
 #  - "**/failsafe-reports/TEST-*.xml"
-#- type: junit
-#  command: bin/solano-runner -Dwebdriver.browser.type=GOOGLECHROME -DtestThreadCount=5
-#  invocation: single
-#  mode: parallel
-#  mode: basic
-#  output: exit-status
-#  files:
-#  - include: '**/*Test.java'
-#  report_files:
-#  - "**/surefire-reports/TEST-*.xml"
-#  - "**/failsafe-reports/TEST-*.xml"
-#- type: junit
-#  command: bin/solano-runner -Dwebdriver.browser.type=FIREFOX -DtestThreadCount=10
-#  invocation: single
-#  mode: basic
-#  report_files:
-#  - "**/failsafe-reports/TEST-*.xml"
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=GOOGLECHROME -DtestThreadCount=4
+  invocation: single
+  mode: parallel
+  output: exit-status
+  files:
+  - include: '**/*Test.java'
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=FIREFOX -DtestThreadCount=4
+  invocation: single
+  mode: parallel
+  output: exit-status
+  files:
+  - include: '**/*Test.java'
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
 #- type: junit
 #  command: bin/solano-runner -Dwebdriver.browser.type=ie10 -DtestThreadCount=10
 #    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
@@ -45,7 +46,8 @@ system:
 #    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
 #  invocation: single
 #  mode: basic
-#  report_files: *1
+#  report_files:
+#  - "**/failsafe-reports/TEST-*.xml"
 #- type: junit
 #  command: mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml clean post-integration-test
 #    -DskipUnitTests -DrunIntTests -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
