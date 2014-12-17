@@ -175,15 +175,8 @@ public class AuraIntegrationTests extends TestSuite {
             if (testsToRun != null) {
                 String testClassName = test.getClass().getName().toLowerCase();
                 String suiteName = testClassName.substring(testClassName.lastIndexOf('.') + 1);
-                //if (suiteName == "attributeimpltest") {
-        	//    logger.info(String.format("IPL:1: %s", testShortName));
-                //}
                 if (!testsToRun.contains(suiteName)) {
-                    //logger.info(String.format("IPL:1: skipped.suiteName='%s'", suiteName));
                     return;
-                } else {
-              	    logger.info(String.format("IPL:0: matched.suiteName='%s'", suiteName));
-              	    logger.info(String.format("IPL:2: testsToRun=%s", testsToRun.toString()));
                 }
             }
             number++;
