@@ -86,19 +86,19 @@ system:
 #  - include: '**/*Test.java'
 #  report_files:
 #  - "**/failsafe-reports/TEST-*.xml"
-- type: junit
-  command: bin/solano-runner -Dwebdriver.browser.type=safari -DtestThreadCount=4
-    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
-    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
-    -Dwebdriver.remote.server=saucelabs.com
-    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
-  invocation: single
-  mode: parallel
-  output: exit-status
-  files:
-  - include: '**/*Test.java'
-  report_files:
-  - "**/failsafe-reports/TEST-*.xml"
+#- type: junit
+#  command: bin/solano-runner -Dwebdriver.browser.type=safari -DtestThreadCount=4
+#    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+#    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+#    -Dwebdriver.remote.server=saucelabs.com
+#    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+#  invocation: single
+#  mode: parallel
+#  output: exit-status
+#  files:
+#  - include: '**/*Test.java'
+#  report_files:
+#  - "**/failsafe-reports/TEST-*.xml"
 
 :collect:
   :repo:
