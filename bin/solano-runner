@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+# Separate maven options from arguments.
+# Arguments are treated as files paths list.
+(options, files) = ARGV.partition {|arg| arg.start_with?('-D')}
+
+# Fetch class names from files paths. 
+classes = files.map{|f| File.basename(f).split('.')[0]}
+
+# Compose maven command.
+cmd = "("
+cmd += "mvn -B -f $TDDIUM_REPO_ROOT/aura-integration-test/pom.xml post-integration-test -DrunIntTests -DskipUnitTests -Djava.io.tmpdir=$TDDIUM_REPO_ROOT/tmp -Dwebdriver.reusebrowser=true -DskipJsDoc -Dscreenshots.directory=$TDDIUM_REPO_ROOT/screenshots #{options.join(' ')}"
+cmd += " -DtestsToRun=#{classes.join(',')}" if classes.length > 0
+cmd += ")"
+ 
+puts cmd
+ 
+# Run.
+system(cmd)

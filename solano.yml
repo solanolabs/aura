@@ -1,0 +1,97 @@
+---
+system:
+  disable_dodge_preload: true
+:java:
+  :java_version: java-7-openjdk
+  :maven_version: 3.0.5
+:hooks:
+  :post_setup: "mkdir -p $TDDIUM_REPO_ROOT/screenshots && touch $TDDIUM_REPO_ROOT/screenshots/.holder && mvn clean install"
+:timeout_hook: 1200
+:timeout: 7200
+:headless: true
+
+:tests:
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=android_phone -DtestThreadCount=4
+    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.remote.server=saucelabs.com
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=GOOGLECHROME -DtestThreadCount=4
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=FIREFOX -DtestThreadCount=4
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=ie10 -DtestThreadCount=4
+    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.remote.server=saucelabs.com
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=ie7 -DtestThreadCount=4
+    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.remote.server=saucelabs.com
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID -Dsauce.record.screenshots=true
+    -Dsauce.record.video=true
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=ie8 -DtestThreadCount=4
+    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.remote.server=saucelabs.com
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=ie9 -DtestThreadCount=4
+    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.remote.server=saucelabs.com
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+- type: junit
+  command: bin/solano-runner -Dwebdriver.browser.type=safari -DtestThreadCount=4
+    -Dsauce.connect.host=rsalvador-wsl.internal.salesforce.com:4445
+    -Dsauce.access.key=3fc36929-9486-47a2-b336-03a319eada17 -Dsauce.username=lumen
+    -Dwebdriver.remote.server=saucelabs.com
+    -Dlumen.build.id=$TDDIUM_SESSION_ID#$TDDIUM_TEST_EXEC_ID
+  invocation: single
+  mode: basic
+  report_files:
+  - "**/failsafe-reports/TEST-*.xml"
+
+:collect:
+  :repo:
+  - screenshots/**/*
